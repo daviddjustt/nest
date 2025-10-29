@@ -13,10 +13,11 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
+  previewFeatures = ["driverAdapters"] // opcional
+  binaryTargets = ["native"]
 }
-
 model User {
   id        Int      @id @default(autoincrement())
   name      String   @unique  
