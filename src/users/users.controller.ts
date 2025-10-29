@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch, Post, Body, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Post, Body, Delete, Query, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
@@ -18,8 +18,8 @@ export class UsersController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.userService.findOne(+id) // Todos os parâmteros são string, mas o "+" no id, resolve isso 
+    findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.userService.findOne(id) // Todos os parâmteros são string, mas o "+" no id, resolve isso 
     }
 
     @Post() // Lemos o BODYREQUEST, ele recebe um obj user
@@ -29,14 +29,14 @@ export class UsersController {
 
     @Patch(':id')
     update(
-        @Param('id') id: string,
+        @Param('id', ParseIntPipe) id: number,
         @Body() updateUser : UpdateUserDto,
     ) {
-        return this.userService.update(+id, updateUser)
+        return this.userService.update(id, updateUser)
     }
 
     @Delete(':id')
-    delete(@Param('id') id: string) {
-        return this.userService.delete(+id)
+    delete(@Param('id', ParseIntPipe) id: number) {
+        return this.userService.delete(id)
     }
 }
