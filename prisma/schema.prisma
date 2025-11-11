@@ -18,7 +18,7 @@ generator client {
   previewFeatures = ["driverAdapters"] // opcional
   binaryTargets = ["native"]
 }
-model User {
+model Employees {
   id        Int      @id @default(autoincrement())
   name      String   @unique  
   email     String   @unique  
